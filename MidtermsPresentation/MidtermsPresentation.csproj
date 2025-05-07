@@ -68,6 +68,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="LibrarianHome.xaml.cs">
+      <DependentUpon>LibrarianHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StudentHome.xaml.cs">
+      <DependentUpon>StudentHome.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StudentsHome.xaml.cs">
       <DependentUpon>StudentsHome.xaml</DependentUpon>
     </Compile>
@@ -76,6 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AdminManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LibrarianHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,6 +101,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StudentHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StudentsHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -15,22 +15,14 @@ using System.Windows.Shapes;
 namespace MidtermsPresentation
 {
     /// <summary>
-    /// Interaction logic for AdminHome.xaml
+    /// Interaction logic for StudentHome.xaml
     /// </summary>
-    public partial class AdminHome : Window
+    public partial class StudentHome : Window
     {
-        public AdminHome()
+        public StudentHome()
         {
             InitializeComponent();
         }
-
-        private void MUABtn_Click(object sender, RoutedEventArgs e)
-        {
-            AdminManager adminManager = new AdminManager();
-            adminManager.Show();
-            this.Close();
-        }
-
         private void LGBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = new MainWindow();

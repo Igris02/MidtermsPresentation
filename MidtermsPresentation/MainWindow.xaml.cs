@@ -54,11 +54,15 @@ namespace MidtermsPresentation
                 }
                 else if (user.UserRole == "librarian")
                 {
-                    MessageBox.Show("librarian logic here");
+                    LibrarianHome librarianHome = new LibrarianHome();
+                    librarianHome.Show();
+                    this.Close();
                 }
                 else if (user.UserRole == "student")
                 {
-                    MessageBox.Show("student logic here");
+                    StudentHome studentHome = new StudentHome();
+                    studentHome.Show();
+                    this.Close();
                 }
 
                 this.Close();
