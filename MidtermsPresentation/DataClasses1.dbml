@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Midterms" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-JLDKE182\SQLEXPRESS;Initial Catalog=Midterms;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="MidtermsPresentation.Properties.Settings" SettingsPropertyName="MidtermsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Student" Member="Students">
+    <Type Name="Student">
+      <Column Name="StudentID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudentName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Number" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="CourseID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Student_LibraryVisit" Member="LibraryVisits" ThisKey="StudentID" OtherKey="StudentID" Type="LibraryVisit" />
+      <Association Name="Student_BorrowTransaction" Member="BorrowTransactions" ThisKey="StudentID" OtherKey="StudentID" Type="BorrowTransaction" />
+      <Association Name="Course_Student" Member="Course" ThisKey="CourseID" OtherKey="CourseID" Type="Course" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LibraryVisit" Member="LibraryVisits">
+    <Type Name="LibraryVisit">
+      <Column Name="VisitID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VisitDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DurationOfVisit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Student_LibraryVisit" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Fine" Member="Fines">
+    <Type Name="Fine">
+      <Column Name="FineID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TransactionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FineAmount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="NumberOfDaysLate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DailyFineRate" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Association Name="BorrowTransaction_Fine" Member="BorrowTransaction" ThisKey="TransactionID" OtherKey="TransactionID" Type="BorrowTransaction" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BorrowTransaction" Member="BorrowTransactions">
+    <Type Name="BorrowTransaction">
+      <Column Name="TransactionID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ISBN" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="BorrowDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ReturnDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="FineAmount" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Association Name="BorrowTransaction_Fine" Member="Fines" ThisKey="TransactionID" OtherKey="TransactionID" Type="Fine" />
+      <Association Name="Student_BorrowTransaction" Member="Student" ThisKey="StudentID" OtherKey="StudentID" Type="Student" IsForeignKey="true" />
+      <Association Name="Book_BorrowTransaction" Member="Book" ThisKey="ISBN" OtherKey="ISBN" Type="Book" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Book" Member="Books">
+    <Type Name="Book">
+      <Column Name="ISBN" Type="System.String" DbType="VarChar(13) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="BookTitle" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Author" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="PublicationYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Genre" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="AvailableCopies" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Book_BorrowTransaction" Member="BorrowTransactions" ThisKey="ISBN" OtherKey="ISBN" Type="BorrowTransaction" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Course" Member="Courses">
+    <Type Name="Course">
+      <Column Name="CourseID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CourseName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Association Name="Course_Student" Member="Students" ThisKey="CourseID" OtherKey="CourseID" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserTable" Member="UserTables">
+    <Type Name="UserTable">
+      <Column Name="UserName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="UserPassWord" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="UserRole" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
